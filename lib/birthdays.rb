@@ -33,7 +33,7 @@ class Birthdays
   def upcoming
     with_birthdays.select do |e|
       e.birthday > Date.today && e.birthday - 10 < Date.today
-    end
+    end.sort_by(&:birthday)
   end
 
   def today
