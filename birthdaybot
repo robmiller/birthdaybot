@@ -1,0 +1,40 @@
+#!/usr/bin/env ruby
+
+require "bundler/setup"
+require "peoplehr"
+require_relative "lib/birthdays"
+require_relative "lib/slack"
+
+def list_birthdays(birthdays)
+  text = ""
+  if birthdays.length > 0
+    birthdays.each do |employee|
+      text << "#{employee.first_name} #{employee.last_name} (#{employee.birthday.strftime("%A %-d %B")}, age #{employee.age})\n"
+    end
+  else
+    text << "None"
+  end
+
+  text
+end
+
+api       = PeopleHR::API.new(api_key: ENV["PEOPLEHR_API_KEY"])
+employees = PeopleHR::Employees.new(api: api).all
+
+birthdays = Birthdays.new(employees: employees)
+
+slack = Slack.new(webhook_url: ENV["SLACK_WEBHOOK_URL"])
+
+message = ""
+
+message << "*Upcoming birthdays:*\n"
+message << list_birthdays(birthdays.upcoming)
+message << "\n\n"
+if birthdays.today.length > 0
+  message << "*Happy birthday for today to:*\n"
+  birthdays.today.each do |employee|
+    message << "#{employee.first_name} #{employee.last_name} (age #{employee.age})\n"
+  end
+end
+
+slack.send(message)
