@@ -1,6 +1,6 @@
 GIT
   remote: git@github.com:robmiller/peoplehr.git
-  revision: 4bf2e3d903f1c233d50f5dbcd3c397dc9ceecf06
+  revision: 7f7d501f3a371d4dbc4e9e4a048458cfb3805769
   specs:
     peoplehr (0.1.0)
       addressable (~> 2.3)
@@ -30,8 +30,8 @@ GEM
     ice_nine (0.11.1)
     multipart-post (2.0.0)
     thread_safe (0.3.5)
-    transproc (0.3.1)
-    typhoeus (0.7.2)
+    transproc (0.3.2)
+    typhoeus (0.7.3)
       ethon (>= 0.7.4)
     virtus (1.0.5)
       axiom-types (~> 0.1)
