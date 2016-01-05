@@ -9,7 +9,7 @@ class Birthdays
       .each do |e|
         def e.birthday
           date_of_birth.is_a?(Date) &&
-            Date.new(2015, date_of_birth.month, date_of_birth.day)
+            Date.new(Date.today.year, date_of_birth.month, date_of_birth.day)
         end
 
         def e.age
