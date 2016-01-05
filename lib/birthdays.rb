@@ -1,3 +1,5 @@
+require "pathname"
+
 class Birthdays
   def initialize(employees:)
     @all_employees = employees
@@ -5,7 +7,7 @@ class Birthdays
 
   def employees
     all_employees
-      .reject { |e| e.first_name == "Rachel" && e.last_name == "Goulding" }
+      .reject { |e| excludes.include?("#{e.first_name} #{e.last_name}") }
       .each do |e|
         def e.birthday
           date_of_birth.is_a?(Date) &&
@@ -44,4 +46,13 @@ class Birthdays
 
   private
   attr_reader :api, :all_employees
+
+  def excludes
+    @excludes ||=
+      File.read(excludes_file).split("\n").map(&:chomp)
+  end
+
+  def excludes_file
+    Pathname(__dir__) + ".." + "excludes"
+  end
 end
