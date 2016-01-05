@@ -17,6 +17,7 @@ GEM
       descendants_tracker (~> 0.0.4)
       ice_nine (~> 0.11.0)
       thread_safe (~> 0.3, >= 0.3.1)
+    coderay (1.1.0)
     coercible (1.0.0)
       descendants_tracker (~> 0.0.1)
     descendants_tracker (0.0.4)
@@ -28,7 +29,13 @@ GEM
       multipart-post (>= 1.2, < 3)
     ffi (1.9.10)
     ice_nine (0.11.1)
+    method_source (0.8.2)
     multipart-post (2.0.0)
+    pry (0.10.1)
+      coderay (~> 1.1.0)
+      method_source (~> 0.8.1)
+      slop (~> 3.4)
+    slop (3.6.0)
     thread_safe (0.3.5)
     transproc (0.3.2)
     typhoeus (0.7.3)
@@ -45,6 +52,7 @@ PLATFORMS
 DEPENDENCIES
   addressable
   peoplehr!
+  pry
   typhoeus
 
 BUNDLED WITH
