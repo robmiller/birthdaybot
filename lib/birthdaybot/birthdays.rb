@@ -53,6 +53,6 @@ class Birthdays
   end
 
   def excludes_file
-    Pathname(__dir__) + ".." + "excludes"
+    Pathname(__dir__) + ".." + ".." + "excludes"
   end
 end
