@@ -1,5 +1,7 @@
 require "pathname"
 
+require_relative "employee-with-birthday"
+
 class Birthdays
   def initialize(employees:)
     @all_employees = employees
@@ -8,20 +10,7 @@ class Birthdays
   def employees
     all_employees
       .reject { |e| excludes.include?("#{e.first_name} #{e.last_name}") }
-      .each do |e|
-        def e.birthday
-          date_of_birth.is_a?(Date) &&
-            Date.new(Date.today.year, date_of_birth.month, date_of_birth.day)
-        end
-
-        def e.age
-          if date_of_birth.is_a?(Date)
-            ((birthday - date_of_birth) / 365).floor
-          else
-            "Unknown"
-          end
-        end
-      end
+      .map { |e| EmployeeWithBirthday.new(e) }
   end
 
   def without_birthdays
@@ -53,6 +42,6 @@ class Birthdays
   end
 
   def excludes_file
-    Pathname(__dir__) + ".." + "excludes"
+    Pathname(__dir__) + ".." + ".." + "excludes"
   end
 end

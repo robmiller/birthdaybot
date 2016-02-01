@@ -2,8 +2,7 @@
 
 require "bundler/setup"
 require "peoplehr"
-require_relative "lib/birthdays"
-require_relative "lib/slack"
+require_relative "lib/birthdaybot"
 
 def list_birthdays(birthdays)
   text = ""
