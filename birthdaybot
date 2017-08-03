@@ -20,7 +20,8 @@ end
 api       = PeopleHR::API.new(api_key: ENV["PEOPLEHR_API_KEY"])
 employees = PeopleHR::Employees.new(api: api).all
 
-birthdays = Birthdays.new(employees: employees)
+excludes  = File.read(Pathname(__dir__) / "excludes").lines
+birthdays = Birthdays.new(employees: employees, excludes: excludes)
 
 slack = Slack.new(webhook_url: ENV["SLACK_WEBHOOK_URL"])
 

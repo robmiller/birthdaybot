@@ -3,8 +3,9 @@ require "pathname"
 require_relative "employee-with-birthday"
 
 class Birthdays
-  def initialize(employees:)
+  def initialize(employees:, excludes: [])
     @all_employees = employees
+    @excludes      = excludes
   end
 
   def employees
@@ -34,14 +35,5 @@ class Birthdays
   end
 
   private
-  attr_reader :api, :all_employees
-
-  def excludes
-    @excludes ||=
-      File.read(excludes_file).split("\n").map(&:chomp)
-  end
-
-  def excludes_file
-    Pathname(__dir__) + ".." + ".." + "excludes"
-  end
+  attr_reader :api, :all_employees, :excludes
 end
