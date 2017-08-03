@@ -1,8 +1,9 @@
 #!/usr/bin/env ruby
 
 require "bundler/setup"
-require "peoplehr"
 require_relative "lib/birthdaybot"
+
+require "pry"
 
 def list_birthdays(birthdays)
   text = ""
@@ -17,13 +18,12 @@ def list_birthdays(birthdays)
   text
 end
 
-api       = PeopleHR::API.new(api_key: ENV["PEOPLEHR_API_KEY"])
-employees = PeopleHR::Employees.new(api: api).all
+employees = Employees.new(api_key: ENV.fetch("BREATHE_API_KEY")).all
 
 excludes  = File.read(Pathname(__dir__) / "excludes").lines
 birthdays = Birthdays.new(employees: employees, excludes: excludes)
 
-slack = Slack.new(webhook_url: ENV["SLACK_WEBHOOK_URL"])
+slack = Slack.new(webhook_url: ENV.fetch("SLACK_WEBHOOK_URL"))
 
 message = ""
 
