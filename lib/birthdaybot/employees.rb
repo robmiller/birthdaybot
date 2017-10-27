@@ -33,6 +33,7 @@ class Employees
     data = JSON.parse(@json)
     data["employees"].map do |employee|
       next unless employee["dob"]
+      next unless ["Current employee", "Pending leaver"].include? employee["status"]
       Employee.new(employee["first_name"], employee["last_name"], Date.parse(employee["dob"]))
     end.compact
   end
